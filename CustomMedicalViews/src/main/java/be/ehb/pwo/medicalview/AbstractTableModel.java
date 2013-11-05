@@ -1,4 +1,4 @@
-package com.example.custommedicalviews;
+package be.ehb.pwo.medicalview;
 
 import java.util.ArrayList;
 import java.util.List;

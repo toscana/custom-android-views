@@ -15,7 +15,6 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class TableView extends TableLayout implements TableModelListener {
 	
-	private List<LinearLayout> cols;
 	private TableModel model;
 	private TableViewLayout layout;
 
@@ -35,16 +34,55 @@ public class TableView extends TableLayout implements TableModelListener {
 	
 	public void setLayout(TableViewLayout layout){
 		this.layout = layout;
+		updateLayout();
+	}
+	
+	public void updateLayout(){
+		
+		int nbRows = model.getRowCount();
+		int nbCols = model.getColumnCount();
+
+		
+		//+1 because we also want to layout the header
+		for(int i=0;i<nbRows+1;i++){
+			
+			TableRow tr = (TableRow) getChildAt(i);
+					
+			for(int j=0;j<nbCols;j++){
+					
+				TextView t = (TextView) tr.getChildAt(j);
+				//Log.d("bert","waarde is " + i + "," + j);
+				
+				CellLayout cl = layout.getLayoutForCell(i,j);
+				if(cl != null)
+					cl.applyToElement(t);
+				
+			}
+		}
+			
+		this.requestLayout();
+		this.invalidate();
 	}
 
 	private void initialize() {
 		int nbRows = model.getRowCount();
 		int nbCols = model.getColumnCount();
 
+		TableRow header = new TableRow(this.getContext());
+		this.addView(header,0);
+		
+		for(int j = 0;j<nbCols;j++){
+			TextView t = new TextView(this.getContext());
+			t.setText(model.getColumnName(j));
+			t.setPadding(10, 4, 10, 4);
+			header.addView(t);
+			
+		}
+		
 		for(int i=0;i<nbRows;i++){
 			
 			TableRow tr = new TableRow(this.getContext());
-			this.addView(tr,i);
+			this.addView(tr,i+1);
 			
 			for(int j=0;j<nbCols;j++){
 					
@@ -52,6 +90,7 @@ public class TableView extends TableLayout implements TableModelListener {
 				Log.d("bert","waarde is " + i + "," + j);
 				t.setText(model.getValueAt(i,j).toString());
 				tr.addView(t);
+				t.setPadding(10, 4, 10, 4);
 			}
 		}
 			

@@ -8,13 +8,16 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class TableView extends LinearLayout implements TableModelListener {
+public class TableView extends TableLayout implements TableModelListener {
 	
 	private List<LinearLayout> cols;
 	private TableModel model;
+	private TableViewLayout layout;
 
 	public TableView(Context context,TableModel model) {
 		super(context);
@@ -30,48 +33,26 @@ public class TableView extends LinearLayout implements TableModelListener {
 		initialize();
 	}
 	
+	public void setLayout(TableViewLayout layout){
+		this.layout = layout;
+	}
 
 	private void initialize() {
-		// TODO Auto-generated method stub
-		this.setOrientation(LinearLayout.HORIZONTAL);
-		
-		cols = new ArrayList<LinearLayout>();
 		int nbRows = model.getRowCount();
 		int nbCols = model.getColumnCount();
-		
-		
-		
-		for(int i=0;i<nbCols;i++){
+
+		for(int i=0;i<nbRows;i++){
 			
-			LinearLayout l = new LinearLayout(this.getContext());
-			l.setOrientation(LinearLayout.VERTICAL);
-			cols.add(l);
-			this.addView(l);
-			TextView headerView =new TextView(this.getContext());
-			headerView.setPadding(50, 0, 50, 0);
-			headerView.setText(model.getColumnName(i));
-			LayoutParams p = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,1);
+			TableRow tr = new TableRow(this.getContext());
+			this.addView(tr,i);
 			
-			headerView.setLayoutParams(p);
-			l.addView(headerView);
-				
-			
-			for(int j=1;j<nbRows+1;j++){
+			for(int j=0;j<nbCols;j++){
 					
 				TextView t = new TextView(this.getContext());
 				Log.d("bert","waarde is " + i + "," + j);
-				t.setText(model.getValueAt(j-1,i).toString());
-				l.addView(t);
-				t.setPadding(50, 0, 50, 0);
-			
-				p = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,1);
-				
-				t.setLayoutParams(p);
-					
-				
+				t.setText(model.getValueAt(i,j).toString());
+				tr.addView(t);
 			}
-			
-			
 		}
 			
 		Log.d("bert","row size is " + nbRows);

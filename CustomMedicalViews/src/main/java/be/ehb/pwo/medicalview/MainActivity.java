@@ -99,8 +99,8 @@ public class MainActivity extends Activity {
 		thrid.add("Josiane");
 		thrid.add("Leysen");
 		thrid.add("Europalaan");
-		thrid.add("Europqsefkljqzzefjklmzqefjklmzeqffjklmzefqjmqelkfjzeqmflkzejqfmlkzqjfzemklfjzemlfkzejfmlzekjfzelmkfjemflkzejfmzeqkfjmezfzqefalaan");
-		thrid.add("Europalaaqzeflqzkekjfzqelmfkjzeqfomzeqfzeqfzeqfzeqfzeqfzeqfzeqn");
+		thrid.add("Europfmzeqkfjmezfzqqsefqsefsssssssssssssssssefalaan");
+		thrid.add("ftghtfhsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqsefqtfh");
 		data.add(thrid);
 		
 		thrid = new ArrayList<Object>();
@@ -115,8 +115,8 @@ public class MainActivity extends Activity {
 		thrid.add("Josiane");
 		thrid.add("Leysen");
 		thrid.add("Europalaan");
-		thrid.add("Europalaan");
-		thrid.add("Europalaan");
+		thrid.add("i");
+		thrid.add("Europaqzefqzefzeefzefzefefefefezfzelaan");
 		data.add(thrid);
 		
 	
